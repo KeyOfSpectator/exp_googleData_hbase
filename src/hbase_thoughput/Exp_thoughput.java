@@ -23,6 +23,7 @@ public class Exp_thoughput {
  * args[0] :  csvFilePath 		  	exp:"/home/fsc/ubuntu_exp/0.csv";
  * args[1] :  hbase-site_PathStr  	exp:"/home/fsc/hbase/hbase-0.98.9-hadoop2/conf/hbase-site.xml";
  * args[2] :  tableName				exp:"google_exp_57M_singleMachine";
+ * 
  */
 	
 //	 Config:
