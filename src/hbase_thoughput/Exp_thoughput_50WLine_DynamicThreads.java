@@ -56,29 +56,38 @@ public class Exp_thoughput_50WLine_DynamicThreads {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		System.out.print("/* \n"
-				+ " * Exp for thoughput\n"
-				+ " * Data is 50WLine\n"
-				+ " * "
-				+ " * param:\n"
-				+ " * args[0] : csvFolderPath\n"
-				+ " * args[1] : hbase-site Path\n"
-				+ " * args[2] : thread Num\n"
-				+ " * args[3] : table Name\n"
-				+ " * args[4] : hbase create table split num\n"
-				+ " * /\n");
+//		System.out.print("/* \n"
+//				+ " * Exp for thoughput\n"
+//				+ " * Data is 50WLine\n"
+//				+ " * "
+//				+ " * param:\n"
+//				+ " * args[0] : csvFolderPath\n"
+//				+ " * args[1] : hbase-site Path\n"
+//				+ " * args[2] : thread Num\n"
+//				+ " * args[3] : hbase create table split num\n"
+//				+ " * args[4] : table Name\n"
+//				+ " * /\n");
 		
 		// param
 		// final int threadCount = Integer.parseInt(args[3]);
 		final String csvFolderPath = args[0];
 		final String site_PathStr = args[1];
 		final String threadNum = args[2];
-		final String tableName = args[3];
-		final String SplitNum_Str = args[4];
+		final String SplitNum_Str = args[3];
+		final String tableName = args[4];
 		final int threadCount = Integer.parseInt(threadNum);
 		final int SplitNum = Integer.parseInt(SplitNum_Str);
 		final int opcount = 500000/threadCount;
 		
+		System.out.print("/* \n"
+				+ " * Exp for thoughput\n"
+				+ " * Data is 50WLine\n"
+				+ " * \n"
+				+ " * param:\n"
+				+ " * [param] : thread Num: " + threadNum + "\n"
+				+ " * [param] : split num : " + SplitNum_Str + "\n"
+				+ " * [param] : table Name: " + tableName + "\n"
+				+ " * /\n");
 //		createtable
 		Configuration conf = HBaseConfiguration.create();
 		HTableDescriptor htd = new HTableDescriptor(tableName);
@@ -113,6 +122,9 @@ public class Exp_thoughput_50WLine_DynamicThreads {
 			}
 		}
 		long en = System.currentTimeMillis();
+		System.out.println("Total time : "
+				+ (double) (en - st)
+				+ " ms");
 		System.out.println("Throughput: "
 						+ ((1000.0) * (((double) (opcount * threadCount)) / ((double) (en - st))))
 						+ " ops/sec");

@@ -50,9 +50,9 @@ public class OptThread_DynamicNum extends Thread{
 	public void run(){
 		
 		try{
-			System.out.println("[Thread Info]"
-					+ " threadId = " + this.threadId
-					+ " started");
+//			System.out.println("[Thread Info]"
+//					+ " threadId = " + this.threadId
+//					+ " started");
 			
 			Configuration conf = HBaseConfiguration.create();
 			
@@ -73,19 +73,19 @@ public class OptThread_DynamicNum extends Thread{
 				long total_write_time = 0;
 				
 				HTable table;
-				synchronized(Exp_thoughput_57M_32Threads.tableLock){
+//				synchronized(Exp_thoughput_57M_32Threads.tableLock){
 					table = new HTable(conf, htd.getName());
 					table.setAutoFlush(false);
 					table.setWriteBufferSize(1024*1024*2);
-				}
+//				}
 				// table.setWriteBufferSize(209715200);
 //				System.out.println("[Thread Info]"
 //						+ " threadId = " + this.threadId
 //						+ " WriteBufferSize :  " + table.getWriteBufferSize());
 				
-				System.out.println("[Thread Info]"
-						+ " threadId = " + this.threadId
-						+ " csvFilePath :  " + csvFilePath);
+//				System.out.println("[Thread Info]"
+//						+ " threadId = " + this.threadId
+//						+ " csvFilePath :  " + csvFilePath);
 				
 				
 				while (reader.readRecord()) { // 逐行读入除表头的数据
@@ -131,16 +131,16 @@ public class OptThread_DynamicNum extends Thread{
 //							+ " [Line] HBase write line : " + i);
 				}//end while
 				
-				synchronized(Exp_thoughput_57M_32Threads.tableLock){
+//				synchronized(Exp_thoughput_57M_32Threads.tableLock){
 					table.flushCommits();
-				}
+//				}
 				
-				System.out.println("[Thread Info]"
-						+ " threadId = " + this.threadId
-						+ " [Time] HBase write time : " + total_write_time);
-				System.out.println("[Thread Info]"
-						+ " threadId = " + this.threadId
-						+ " [Line] HBase write Line : " + (i-i_origin));
+//				System.out.println("[Thread Info]"
+//						+ " threadId = " + this.threadId
+//						+ " [Time] HBase write time : " + total_write_time);
+//				System.out.println("[Thread Info]"
+//						+ " threadId = " + this.threadId
+//						+ " [Line] HBase write Line : " + (i-i_origin));
 				reader.close();
 			}
 			catch (Exception ex) {
