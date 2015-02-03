@@ -1,5 +1,6 @@
 package thread;
 
+import hbase_thoughput.Exp_thoughput_50WL_DyThreadSplit_PreRead;
 import hbase_thoughput.Exp_thoughput_57M_32Threads;
 
 import java.nio.charset.Charset;
@@ -25,7 +26,7 @@ public class OptThread_DyThreadSplit_PreRead extends Thread{
 	private String site_PathStr;
 	private String tableName;
 	private int opt_per_thread;
-	private ArrayList<byte[][]> byte_list;
+//	private ArrayList<byte[][]> byte_list;
 	
 	static String familyName = "colFamily";
 	static String col0 = "time";
@@ -42,13 +43,13 @@ public class OptThread_DyThreadSplit_PreRead extends Thread{
 	static String col11 = "disk";
 	static String col12 = "different";
 	
-	public OptThread_DyThreadSplit_PreRead(int threadId ,int threadCount , ArrayList<byte[][]> byte_list , String site_PathStr , String tableName){
+	public OptThread_DyThreadSplit_PreRead(int threadId ,int threadCount , String site_PathStr , String tableName){
 		this.threadId = threadId;
 //		this.csvFilePath = FolderPath+String.valueOf(threadId)+".csv";
 		this.site_PathStr = site_PathStr;
 		this.tableName = tableName;
 		this.opt_per_thread = 500000/threadCount;
-		this.byte_list = byte_list;
+//		this.byte_list = Exp_thoughput_50WL_DyThreadSplit_PreRead.byte_list;
 	}
 	public void run(){
 		
@@ -115,19 +116,19 @@ public class OptThread_DyThreadSplit_PreRead extends Thread{
 						 * add(byte[] family, byte[] qualifier, byte[] value) 
 						 * Add the specified column and value to this Put operation.
 						 */
-						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col0), byte_list.get(i)[0]);
-						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col1), byte_list.get(i)[1]);
-						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col2), byte_list.get(i)[2]);
-						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col3), byte_list.get(i)[3]);
-						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col4), byte_list.get(i)[4]);
-						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col5), byte_list.get(i)[5]);
-						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col6), byte_list.get(i)[6]);
-						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col7), byte_list.get(i)[7]);
-						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col8), byte_list.get(i)[8]);
-						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col9), byte_list.get(i)[9]);
-						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col10), byte_list.get(i)[10]);
-						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col11), byte_list.get(i)[11]);
-						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col12), byte_list.get(i)[12]);
+						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col0), Exp_thoughput_50WL_DyThreadSplit_PreRead.byte_list.get(i)[0]);
+						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col1), Exp_thoughput_50WL_DyThreadSplit_PreRead.byte_list.get(i)[1]);
+						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col2), Exp_thoughput_50WL_DyThreadSplit_PreRead.byte_list.get(i)[2]);
+						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col3), Exp_thoughput_50WL_DyThreadSplit_PreRead.byte_list.get(i)[3]);
+						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col4), Exp_thoughput_50WL_DyThreadSplit_PreRead.byte_list.get(i)[4]);
+						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col5), Exp_thoughput_50WL_DyThreadSplit_PreRead.byte_list.get(i)[5]);
+						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col6), Exp_thoughput_50WL_DyThreadSplit_PreRead.byte_list.get(i)[6]);
+						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col7), Exp_thoughput_50WL_DyThreadSplit_PreRead.byte_list.get(i)[7]);
+						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col8), Exp_thoughput_50WL_DyThreadSplit_PreRead.byte_list.get(i)[8]);
+						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col9), Exp_thoughput_50WL_DyThreadSplit_PreRead.byte_list.get(i)[9]);
+						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col10), Exp_thoughput_50WL_DyThreadSplit_PreRead.byte_list.get(i)[10]);
+						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col11), Exp_thoughput_50WL_DyThreadSplit_PreRead.byte_list.get(i)[11]);
+						p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col12), Exp_thoughput_50WL_DyThreadSplit_PreRead.byte_list.get(i)[12]);
 					
 						
 						table.put(p1);

@@ -51,6 +51,7 @@ public class Exp_thoughput_50WL_DyThreadSplit_PreRead {
 	 * 
 	 * }
 	 */
+	public static ArrayList<byte[][]> byte_list;
 
 	public static final Object tableLock = new Object();// syn the table
 
@@ -101,7 +102,7 @@ public class Exp_thoughput_50WL_DyThreadSplit_PreRead {
 //		String[] to byte[][]
 		begin = System.currentTimeMillis();
 		
-		ArrayList<byte[][]> byte_list = Javacsv_util.ArrayList_String2byte(data_list);
+		byte_list = Javacsv_util.ArrayList_String2byte(data_list);
 		
 		end = System.currentTimeMillis();
 		System.out.println("[Time] String[] to byte[][] : " + (end - begin));
@@ -125,7 +126,7 @@ public class Exp_thoughput_50WL_DyThreadSplit_PreRead {
 			 * OptThread_DynamicNum(int threadId ,int threadNum, String FolderPath , String site_PathStr
 			 * , String tableName)
 			 */
-			Thread t = new OptThread_DyThreadSplit_PreRead(i, threadCount , byte_list, site_PathStr, tableName );
+			Thread t = new OptThread_DyThreadSplit_PreRead(i, threadCount , site_PathStr, tableName );
 			allthreads.add(t);
 
 		}
