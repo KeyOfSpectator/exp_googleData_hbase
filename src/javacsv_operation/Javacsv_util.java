@@ -24,12 +24,12 @@ public class Javacsv_util {
 			}
 			reader.close();
 
-			for (int row = 0; row < csvList.size(); row++) {
-
-				String cell = csvList.get(row)[3]; // 取得第row行第0列的数据
+//			for (int row = 0; row < csvList.size(); row++) {
+//
+//				String cell = csvList.get(row)[3]; // 取得第row行第0列的数据
 //				System.out.println(row + "  " + cell);
-
-			}
+//
+//			}
 
 			return csvList;
 
@@ -39,6 +39,11 @@ public class Javacsv_util {
 		return null;
 	}
 
+	/** ArrayList<String[]> => ArrayList<byte[][]>
+	 *  col Num = 13
+	 * @param Str
+	 * @return
+	 */
 	public static ArrayList<byte[][]> ArrayList_String2byte(
 			ArrayList<String[]> Str) {
 
@@ -48,6 +53,28 @@ public class Javacsv_util {
 		for (int row = 0; row < Str.size(); row++) {
 
 			for (int col = 0; col < 13; col++) {
+				byte[] byte_tmp = Bytes.toBytes(Str.get(row)[col]);
+				byte_list_tmp[col] = byte_tmp;
+			}
+			byte_list.add(byte_list_tmp);
+		}
+		return byte_list;
+	}
+	
+	/** ArrayList<String[]> => ArrayList<byte[][]>
+	 * @param Str
+	 * @param colNum
+	 * @return
+	 */
+	public static ArrayList<byte[][]> ArrayList_String2byte(
+			ArrayList<String[]> Str , int colNum) {
+
+		ArrayList<byte[][]> byte_list = new ArrayList<byte[][]>();
+		byte[][] byte_list_tmp = new byte[13][];
+
+		for (int row = 0; row < Str.size(); row++) {
+
+			for (int col = 0; col < colNum; col++) {
 				byte[] byte_tmp = Bytes.toBytes(Str.get(row)[col]);
 				byte_list_tmp[col] = byte_tmp;
 			}

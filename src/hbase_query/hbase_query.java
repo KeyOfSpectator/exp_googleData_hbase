@@ -24,27 +24,8 @@ public class hbase_query {
 	  */
 	 public static void showOneRecordByRowKey(String tableName,String rowKey ,Configuration conf)
 	 {
-//	  HTablePool pool = new HTablePool(conf,100);
-//	  HTable table = (HTable) pool.getTable(tableName);
 	    
 	  try {
-//	   Get get = new Get(rowkey.getBytes()); //根据主键查询
-//	   Result r = table.get(get);
-//	   System.out.println("start===showOneRecordByRowKey==row: "+"\n");
-//	   System.out.println("row: "+new String(r.getRow(),"utf-8"));
-//	   
-//	   for(KeyValue kv:r.raw()){
-//	    //时间戳转换成日期格式
-//	    String timestampFormat = new SimpleDateFormat("yyyy-MM-dd HH:MM:ss").format(new Date(kv.getTimestamp()));
-//	       //System.out.println("===:"+timestampFormat+"  ==timestamp: "+kv.getTimestamp());
-//	    System.out.println("\nKeyValue: "+kv);
-//	    System.out.println("key: "+kv.getKeyString());
-//	    
-//	    System.out.println("family=>"+new String(kv.getFamily(),"utf-8")
-//	          +"  value=>"+new String(kv.getValue(),"utf-8")
-//	    +"  qualifer=>"+new String(kv.getQualifier(),"utf-8")
-//	    +"  timestamp=>"+timestampFormat);
-//	  }
 		  
 		  long st = System.currentTimeMillis();
 		  
@@ -76,13 +57,6 @@ public class hbase_query {
 	 public static void showAllRecordsBetweenRowKey(String tableName , Configuration conf , String StartRowKey , String StopRowKey)
 	 {
 	  System.out.println("start==============show All Records=============");
-	  
-//	  HTablePool pool = new HTablePool(conf,1000);
-//	  //创建table对象
-//	  HTable table = (HTable) pool.getTable(tableName);
-	  
-//	  String startRowKey = "00300468";
-//	  String stopRowKey = "00301468";
 	  
 	  try {
 		  
@@ -163,9 +137,7 @@ public class hbase_query {
 		
 		Configuration conf = HBaseConfiguration.create();
 		conf.addResource(new Path(Site_Path));
-
 		
-//		showOneRecordByRowKey("google_exp_57M_singleMachine","00300468",conf);
 		if(singleOfRange.equals("1")){
 			showOneRecordByRowKey(tableName,StartRowKey,conf);
 		}

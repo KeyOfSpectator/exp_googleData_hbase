@@ -78,7 +78,7 @@ public class Exp_insert_task_event_singleThread_forQuery {
 						String rowKey = job+task+event;
 						rowKey = Hbase_createTable_googleData_util.ExpandString(rowKey, 16);
 						
-						System.out.println(i+" "+event);
+//						System.out.println(i+" "+event);
 					
 						/*
 						 * Put(byte[] row)
@@ -147,7 +147,7 @@ public class Exp_insert_task_event_singleThread_forQuery {
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		if(args.length!=5){
+		if(args.length!=4){
 			System.out.print("/* \n"
 					+ " * Exp for insert task_event\n"
 					+ " * rowkey is job + task + event\n"
@@ -158,19 +158,16 @@ public class Exp_insert_task_event_singleThread_forQuery {
 					+ " * param:\n"
 					+ " * args[0] : csvFilePath\n"
 					+ " * args[1] : hbase-site Path\n"
-					+ " * args[2] : hbase create table split num\n"
-					+ " * args[3] : table Name\n"
-					+ " * args[4] : data lineNum\n"
+					+ " * args[2] : table Name\n"
+					+ " * args[3] : data lineNum\n"
 					+ " * /\n");
 			return;
 		}
 		final String csvFilePath = args[0];
 		final String site_PathStr = args[1];
-		final String SplitNum_Str = args[2];
-		final String tableName = args[3];
-		final String lineNum = args[4];
+		final String tableName = args[2];
+		final String lineNum = args[3];
 		final int lineCount = Integer.parseInt(lineNum);
-		final int SplitNum = Integer.parseInt(SplitNum_Str);
 		
 		System.out.print(""
 				+ " * Exp for insert task_event\n"
@@ -178,7 +175,6 @@ public class Exp_insert_task_event_singleThread_forQuery {
 				+ "\n"
 				+ "[param] csvFilePath : " + csvFilePath + "\n"
 				+ "[param] site_PathStr : " + site_PathStr + "\n"
-				+ "[param] SplitNum_Str : " + SplitNum_Str + "\n"
 				+ "[param] tableName : " + tableName + "\n"
 				+ "[param] lineNum : " + lineNum + "\n"
 				+ ""
