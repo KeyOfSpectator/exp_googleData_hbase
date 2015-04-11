@@ -42,8 +42,8 @@
 * task_event表插入
 * 非自动预分裂region
 * 设置hbase-site.xml
-<property>
-        <name>hbase.hregion.max.filesize</name>
-        <value>2097152</value>
-</property>
+	&lt;property&gt;
+        &lt;name&gt;hbase.hregion.max.filesize&lt;/name&gt;
+        &lt;value&gt;2097152&lt;/value&gt;
+	&lt;/property&gt;
 设置自动分裂region大小为2M
