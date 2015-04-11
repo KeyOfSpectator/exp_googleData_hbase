@@ -25,15 +25,25 @@
 
  exp: java -jar /home/ubuntu/git_projects/exp_googleData_hbase/jar/thoughput50WL_DT_Nologs.jar /home/ubuntu/data/output${threads}/ /home/ubuntu/hbase/hbase-0.98.9-hadoop2/conf/hbase-site.xml ${threads} ${split}  ${threads}T_${split}S_NPR_shellEXE2_${test_loop} >> /home/ubuntu/shell/output/logs
 
-	
-## hbase 查询
-* hbase_query.java
-	
+
 ## hbase 分裂表写入 测thoughput
 * 分裂为两个表 XXX_1 XXX_2
 * Exp_thoughput_split2table_DynamicThreads_50WLine.java
 * 打包为 jar/Exp_thoughput_split2table_DynamicThreads_50WLine.jar
-
+<br>
 * 分裂为三个表 XXX_1 XXX_2 XXX_3
 * Exp_thoughput_split3table_DynamicThreads_50WLine.java
 * 打包为 jar/Exp_thoughput_split3table_DynamicThreads_50WLine.jar
+	
+## hbase 查询
+* hbase_query.java 查询函数
+<br> 
+* hbase_query.Exp_insert_task_event_singleThread_forQuery.java 
+* task_event表插入
+* 非自动预分裂region
+* 设置hbase-site.xml
+<property>
+        <name>hbase.hregion.max.filesize</name>
+        <value>2097152</value>
+</property>
+设置自动分裂region大小为2M

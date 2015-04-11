@@ -57,7 +57,7 @@ public class hbase_query {
 	        }  
 	 
 	        long en = System.currentTimeMillis();
-	        System.out.println("Total time : "
+	        System.out.println("[Time] Total time : "
 	        		+ (double) (en - st)
 	        		+ " ms");
 	        
@@ -111,7 +111,7 @@ public class hbase_query {
 	   rss.close();
 	   
 	   long en = System.currentTimeMillis();
-       System.out.println("Total time : "
+       System.out.println("[Time] Total time : "
        		+ (double) (en - st)
        		+ " ms");
 	   
@@ -126,6 +126,39 @@ public class hbase_query {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
+		if(args.length!=5){
+			System.out.print("/* \n"
+					+ " * hbase query\n"
+					+ " * \n"
+					+ " * \n"
+					+ " * param:\n"
+					+ " * args[0] : singOfRange (which 1 is single and 2 is range) \n"
+					+ " * args[1] : hbase-site.xml Site_Path \n"
+					+ " * args[2] : table Name \n"
+					+ " * args[3] : StartRowKey (which single query is the query rowkey) \n"
+					+ " * args[4] : StopRowKey: \n"
+					+ " * /\n");
+			return;
+		}
+		
+		final String singleOfRange = args[0]; // 1 single , 2 range
+		final String site_PathStr = args[1];
+		final String tableName = args[2];
+		final String StartRowKey = args[3];
+		final String StopRowKey = args[4];
+		
+		System.out.print("/* \n"
+				+ " * hbase query\n"
+				+ " * \n"
+				+ " * \n"
+				+ " * param:\n"
+				+ " * [param] : singOfRange (which 1 is single and 2 is range): " + singleOfRange + " \n"
+				+ " * [param] : hbase-site.xml Site_Path: " + site_PathStr + "\n"
+				+ " * [param] : table Name : " + tableName + "\n"
+				+ " * [param] : StartRowKey (which single query is the query rowkey) : " + StartRowKey + "\n"
+				+ " * [param] : StopRowKey: " + StopRowKey + "\n"
+				+ " * /\n");
+		
 		String Site_Path = "/home/fsc/hbase/hbase-0.98.9-hadoop2/conf/hbase-site.xml";
 		
 		Configuration conf = HBaseConfiguration.create();
@@ -133,8 +166,13 @@ public class hbase_query {
 
 		
 //		showOneRecordByRowKey("google_exp_57M_singleMachine","00300468",conf);
-		
-		showAllRecordsBetweenRowKey("google_exp_57M_singleMachine" , conf , "00300468" , "00311468");
+		if(singleOfRange.equals("1")){
+			showOneRecordByRowKey(tableName,StartRowKey,conf);
+		}
+		else{
+			showAllRecordsBetweenRowKey(tableName , conf , StartRowKey , StopRowKey);
+		}
+		System.out.println("[done] query done");
 	}
 
 }

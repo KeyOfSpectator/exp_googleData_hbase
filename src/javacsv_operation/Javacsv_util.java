@@ -24,14 +24,12 @@ public class Javacsv_util {
 			}
 			reader.close();
 
-			/*
-			 * for(int row=0;row<csvList.size();row++){
-			 * 
-			 * String cell = csvList.get(row)[3]; //取得第row行第0列的数据
-			 * System.out.println(row + "  " + cell);
-			 * 
-			 * }
-			 */
+			for (int row = 0; row < csvList.size(); row++) {
+
+				String cell = csvList.get(row)[3]; // 取得第row行第0列的数据
+//				System.out.println(row + "  " + cell);
+
+			}
 
 			return csvList;
 

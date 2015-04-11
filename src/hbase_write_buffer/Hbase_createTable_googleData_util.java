@@ -13,6 +13,10 @@ import org.apache.hadoop.hbase.client.HTable;
 import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.util.Bytes;
 
+/**
+ * @author fsc
+ *
+ */
 public class Hbase_createTable_googleData_util {
 
 	/*
@@ -26,6 +30,16 @@ public class Hbase_createTable_googleData_util {
 	 * args[6] is the splitNum (int)
 	 */
 
+	/** hbase_createTable
+	 * @param hdfsSite_PathStr
+	 * @param conf
+	 * @param htd
+	 * @param tableName
+	 * @param int StartRowKey
+	 * @param int EndRowKey
+	 * @param splitNum
+	 * @throws IOException
+	 */
 	public static void hbase_createTable(String hdfsSite_PathStr,
 			Configuration conf, HTableDescriptor htd, String tableName,
 			int StartRowKey, int EndRowKey, int splitNum) throws IOException {
@@ -41,30 +55,11 @@ public class Hbase_createTable_googleData_util {
 		HBaseAdmin admin = new HBaseAdmin(conf);
 		// String tableName = "tableName";
 		String familyName = "colFamily";
-		String col0 = "time";
-		String col1 = "missing";
-		String col2 = "job";
-		String col3 = "task";
-		String col4 = "machine";
-		String col5 = "event";
-		String col6 = "user";
-		String col7 = "scheduling";
-		String col8 = "priority";
-		String col9 = "cpu";
-		String col10 = "memory";
-		String col11 = "disk";
-		String col12 = "different";
-
 		// HTableDescriptor htd = new HTableDescriptor(tableName);
 		HColumnDescriptor hdc = new HColumnDescriptor(familyName);
 		htd.addFamily(hdc);
 		long before = System.currentTimeMillis();
 		// admin.createTable(htd,splits);
-
-		/*
-		 * public void createTable(HTableDescriptor desc, byte[] startKey,
-		 * byte[] endKey, int numRegions) throws IOException
-		 */
 
 		// i is the row key , split to 15 , row key range: 000000~499999
 		admin.createTable(htd, Bytes.toBytes(StartRowKey_str),
@@ -73,60 +68,83 @@ public class Hbase_createTable_googleData_util {
 		long after = System.currentTimeMillis();
 		System.out.println("[Time] create table time :  " + (after - before));
 
-		/*
-		 * HTable table = new HTable(conf, htd.getName());
-		 * table.setAutoFlush(false); // table.setWriteBufferSize(209715200);
-		 * System.out.println("[Info] WriteBufferSize :  " +
-		 * table.getWriteBufferSize());
-		 * 
-		 * long begin = System.currentTimeMillis();
-		 * 
-		 * for (int i = 0; i < 50000; i++) { // byte[] kkk = new byte[10000 + i
-		 * / 1000]; // byte [] kkk=new byte[12];
-		 * 
-		 * /* Put(byte[] row) Create a Put operation for the specified row.
-		 */
+	}
+	
+	
+	/** hbase_createTable
+	 * @param hdfsSite_PathStr
+	 * @param conf
+	 * @param htd
+	 * @param tableName
+	 * @param Str StartRowKey
+	 * @param Str EndRowKey
+	 * @param splitNum
+	 * @throws IOException
+	 */
+	public static void hbase_createTable(String hdfsSite_PathStr,
+			Configuration conf, HTableDescriptor htd, String tableName,
+			String StartRowKey, String EndRowKey, int splitNum) throws IOException {
 
-		/*
-		 * Put p1 = new Put(Bytes.toBytes(intToString(i)));
-		 * p1.setWriteToWAL(false);
-		 * 
-		 * /* add(byte[] family, byte[] qualifier, byte[] value) Add the
-		 * specified column and value to this Put operation.
-		 */
+//		String StartRowKey_str = String.valueOf(StartRowKey);
+		String EndRowKey_str = EndRowKey;
+		int RowKeyLength = EndRowKey_str.length();
+		String StartRowKey_str = StartRowKey;
 
-		/*
-		 * 
-		 * p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col0),
-		 * data_list.get(i)[0]); p1.add(Bytes.toBytes(familyName),
-		 * Bytes.toBytes(col1), data_list.get(i)[1]);
-		 * p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col2),
-		 * data_list.get(i)[2]); p1.add(Bytes.toBytes(familyName),
-		 * Bytes.toBytes(col3), data_list.get(i)[3]);
-		 * p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col4),
-		 * data_list.get(i)[4]); p1.add(Bytes.toBytes(familyName),
-		 * Bytes.toBytes(col5), data_list.get(i)[5]);
-		 * p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col6),
-		 * data_list.get(i)[6]); p1.add(Bytes.toBytes(familyName),
-		 * Bytes.toBytes(col7), data_list.get(i)[7]);
-		 * p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col8),
-		 * data_list.get(i)[8]); p1.add(Bytes.toBytes(familyName),
-		 * Bytes.toBytes(col9), data_list.get(i)[9]);
-		 * p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col10),
-		 * data_list.get(i)[10]); p1.add(Bytes.toBytes(familyName),
-		 * Bytes.toBytes(col11), data_list.get(i)[11]);
-		 * p1.add(Bytes.toBytes(familyName), Bytes.toBytes(col12),
-		 * data_list.get(i)[12]);
-		 * 
-		 * table.put(p1);
-		 * 
-		 * // System.out.println(i);
-		 * 
-		 * } long end = System.currentTimeMillis(); table.flushCommits();
-		 * System.out.println("[Time] HBase write time : " + (end - begin));
-		 */
+		// Configuration conf = HBaseConfiguration.create();
+		conf.addResource(new Path(hdfsSite_PathStr));
+		// conf.addResource("/usr/local/hbase/conf/hdfs-site.xml");
+		HBaseAdmin admin = new HBaseAdmin(conf);
+		// String tableName = "tableName";
+		String familyName = "colFamily";
+		// HTableDescriptor htd = new HTableDescriptor(tableName);
+		HColumnDescriptor hdc = new HColumnDescriptor(familyName);
+		htd.addFamily(hdc);
+		long before = System.currentTimeMillis();
+		// admin.createTable(htd,splits);
+
+		// i is the row key , split to 15 , row key range: 000000~499999
+		admin.createTable(htd, Bytes.toBytes(StartRowKey_str),
+				Bytes.toBytes(EndRowKey_str), splitNum);
+
+		long after = System.currentTimeMillis();
+		System.out.println("[Time] create table time :  " + (after - before));
+
+	}
+	
+	/** hbase_createTable
+	 * @param hdfsSite_PathStr
+	 * @param conf
+	 * @param htd
+	 * @param tableName
+	 * @throws IOException
+	 */
+	public static void hbase_createTable(String hdfsSite_PathStr,
+			Configuration conf, HTableDescriptor htd, String tableName) throws IOException {
+
+
+		// Configuration conf = HBaseConfiguration.create();
+		conf.addResource(new Path(hdfsSite_PathStr));
+		// conf.addResource("/usr/local/hbase/conf/hdfs-site.xml");
+		HBaseAdmin admin = new HBaseAdmin(conf);
+		// String tableName = "tableName";
+		String familyName = "colFamily";
+		// HTableDescriptor htd = new HTableDescriptor(tableName);
+		HColumnDescriptor hdc = new HColumnDescriptor(familyName);
+		htd.addFamily(hdc);
+		long before = System.currentTimeMillis();
+		// admin.createTable(htd,splits);
+
+		admin.createTable(htd);
+
+		long after = System.currentTimeMillis();
+		System.out.println("[Time] create table time :  " + (after - before));
+
 	}
 
+	/**
+	 * @param x
+	 * @return
+	 */
 	static public String intToString(int x) {
 		String result = String.valueOf(x);
 		int size = result.length();
@@ -135,6 +153,20 @@ public class Hbase_createTable_googleData_util {
 			result = "0" + result;
 		}
 		return result;
+	}
+	
+	/** Expand String to length
+	 * @param str
+	 * @param length
+	 * @return str
+	 */
+	static public String ExpandString(String str, int length) {
+		int size = str.length();
+		while (size < length) {
+			size++;
+			str = "0" + str;
+		}
+		return str;
 	}
 
 	public static void main(String[] args) {
