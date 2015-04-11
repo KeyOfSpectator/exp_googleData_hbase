@@ -69,7 +69,7 @@ public class Exp_insert_task_event_singleThread_forQuery {
 					
 						String job = data_list.get(i)[2]; //补全到10位
 						String task = data_list.get(i)[3]; //补全到5位
-						String event = data_list.get(i)[5]; //补全到
+						String event = data_list.get(i)[5]; //补全到1位
 						
 						job = Hbase_createTable_googleData_util.ExpandString(job, 10);
 						task = Hbase_createTable_googleData_util.ExpandString(task, 5);
